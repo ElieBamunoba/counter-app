@@ -36,63 +36,62 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
       ),
-      body: BlocListener<CounterCubit, CounterState>(
-        listener: (context, state) {
-          state.wasIncremented == true
-              ? ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Incremented!',
-                    ),
-                    duration: Duration(milliseconds: 300),
-                  ),
-                )
-              : ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Decremented!',
-                    ),
-                    duration: Duration(milliseconds: 300),
-                  ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'COUNTER VALUE',
+              style: TextStyle(fontSize: 35),
+            ),
+            BlocConsumer<CounterCubit, CounterState>(
+              listener: (context, state) {
+                // TODO: implement listener
+                state.wasIncremented == true
+                    ? ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Incremented!',
+                          ),
+                          duration: Duration(milliseconds: 300),
+                        ),
+                      )
+                    : ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Decremented!',
+                          ),
+                          duration: Duration(milliseconds: 300),
+                        ),
+                      );
+              },
+              builder: (context, state) {
+                return Text(
+                  '${state.counterValue}',
+                  style: const TextStyle(fontSize: 35),
                 );
-        },
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              const Text(
-                'COUNTER VALUE',
-                style: TextStyle(fontSize: 35),
-              ),
-              BlocBuilder<CounterCubit, CounterState>(
-                builder: (context, state) {
-                  return Text(
-                    '${state.counterValue}',
-                    style: const TextStyle(fontSize: 35),
-                  );
-                },
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  FloatingActionButton(
-                    onPressed: () {
-                      //accessing the access the instance of the cubic
-                      BlocProvider.of<CounterCubit>(context).decrement();
-                    },
-                    tooltip: 'Decrement',
-                    child: const Icon(Icons.remove),
-                  ),
-                  FloatingActionButton(
-                    onPressed: () =>
-                        BlocProvider.of<CounterCubit>(context).increment(),
-                    tooltip: 'Increment',
-                    child: const Icon(Icons.add),
-                  ),
-                ],
-              )
-            ],
-          ),
+              },
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                FloatingActionButton(
+                  onPressed: () {
+                    //accessing the access the instance of the cubic
+                    BlocProvider.of<CounterCubit>(context).decrement();
+                  },
+                  tooltip: 'Decrement',
+                  child: const Icon(Icons.remove),
+                ),
+                FloatingActionButton(
+                  onPressed: () =>
+                      BlocProvider.of<CounterCubit>(context).increment(),
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                ),
+              ],
+            )
+          ],
         ),
       ),
       // This trailing comma makes auto-formatting nicer for build methods.
