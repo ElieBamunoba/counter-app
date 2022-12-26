@@ -1,6 +1,8 @@
-import 'package:counter_app/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import './business_logic/cubit/counter_cubit.dart';
+import './presentation/router/app_router.dart' as route;
 
 void main() {
   runApp(const MyApp());
@@ -15,86 +17,18 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => CounterCubit(),
       child: MaterialApp(
-        title: 'Flutter bloc Demo',
+        title: 'Bloc Counter App',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(title: 'Flutter Demo Home Page'),
+        onGenerateRoute: route.onGenerateRoute,
+        initialRoute: route.homeScreen,
       ),
     );
   }
-}
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'COUNTER VALUE',
-              style: TextStyle(fontSize: 35),
-            ),
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
-                // TODO: implement listener
-                state.wasIncremented == true
-                    ? ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Incremented!',
-                          ),
-                          duration: Duration(milliseconds: 300),
-                        ),
-                      )
-                    : ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                            'Decremented!',
-                          ),
-                          duration: Duration(milliseconds: 300),
-                        ),
-                      );
-              },
-              builder: (context, state) {
-                return Text(
-                  '${state.counterValue}',
-                  style: const TextStyle(fontSize: 35),
-                );
-              },
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                FloatingActionButton(
-                  onPressed: () {
-                    //accessing the access the instance of the cubic
-                    BlocProvider.of<CounterCubit>(context).decrement();
-                  },
-                  tooltip: 'Decrement',
-                  child: const Icon(Icons.remove),
-                ),
-                FloatingActionButton(
-                  onPressed: () =>
-                      BlocProvider.of<CounterCubit>(context).increment(),
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.add),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+  void dispose() {
+    route.dispose();
   }
 }
