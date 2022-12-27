@@ -1,15 +1,19 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:counter_app/business_logic/cubit/counter_cubit.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:counter_app/business_logic/cubit/counter/counter_cubit.dart';
+import 'package:counter_app/business_logic/cubit/internet/internet_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group(
     'CounterCubit',
     () {
-      CounterCubit counterCubit = CounterCubit();
+      CounterCubit counterCubit = CounterCubit(
+          internetCubit: InternetCubit(connectivity: Connectivity()));
       //setUp is the function used to initialize data that the test will work with
       setUp(() {
-        counterCubit = CounterCubit();
+        counterCubit = CounterCubit(
+            internetCubit: InternetCubit(connectivity: Connectivity()));
       });
       tearDown(() {
         counterCubit.close();

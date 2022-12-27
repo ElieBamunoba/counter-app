@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../business_logic/cubit/internet/internet_cubit.dart';
 import '../router/app_router.dart' as route;
-import '../../business_logic/cubit/counter_cubit.dart';
+import '../../business_logic/cubit/counter/counter_cubit.dart';
+import '../../constants/enums.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -24,6 +26,32 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            BlocBuilder<InternetCubit, InternetState>(
+              builder: ((context, state) {
+                if (state is InternetConnected &&
+                    state.connectionType == ConnectionType.Wifi) {
+                  return const Text(
+                    'Wi-fi',
+                    style: TextStyle(fontSize: 35, color: Colors.green),
+                  );
+                } else if (state is InternetConnected &&
+                    state.connectionType == ConnectionType.Mobile) {
+                  return const Text(
+                    'Mobile',
+                    style: TextStyle(fontSize: 35, color: Colors.orange),
+                  );
+                } else if (state is InternetDesconnected) {
+                  return const Text(
+                    'Disconnected',
+                    style: TextStyle(fontSize: 35, color: Colors.red),
+                  );
+                }
+                return const CircularProgressIndicator();
+              }),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
             const Text(
               'COUNTER VALUE',
               style: TextStyle(fontSize: 35),
