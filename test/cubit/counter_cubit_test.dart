@@ -8,12 +8,10 @@ void main() {
   group(
     'CounterCubit',
     () {
-      CounterCubit counterCubit = CounterCubit(
-          internetCubit: InternetCubit(connectivity: Connectivity()));
+      CounterCubit counterCubit = CounterCubit();
       //setUp is the function used to initialize data that the test will work with
       setUp(() {
-        counterCubit = CounterCubit(
-            internetCubit: InternetCubit(connectivity: Connectivity()));
+        counterCubit = CounterCubit();
       });
       tearDown(() {
         counterCubit.close();
