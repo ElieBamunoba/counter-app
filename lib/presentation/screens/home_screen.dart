@@ -20,13 +20,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<InternetCubit, InternetState>(
       listener: (context, state) {
-        if (state is InternetConnected &&
-            state.connectionType == ConnectionType.Wifi) {
-          BlocProvider.of<CounterCubit>(context).increment();
-        } else if (state is InternetConnected &&
-            state.connectionType == ConnectionType.Mobile) {
-          BlocProvider.of<CounterCubit>(context).decrement();
-        }
+        // if (state is InternetConnected &&
+        //     state.connectionType == ConnectionType.Wifi) {
+        //   BlocProvider.of<CounterCubit>(context).increment();
+        // } else if (state is InternetConnected &&
+        //     state.connectionType == ConnectionType.Mobile) {
+        //   context.read<CounterCubit>().decrement();
+        // }
       },
       child: Scaffold(
         appBar: AppBar(
