@@ -42,18 +42,18 @@ class HomeScreen extends StatelessWidget {
                       state.connectionType == ConnectionType.Wifi) {
                     return const Text(
                       'Wi-fi',
-                      style: TextStyle(fontSize: 35, color: Colors.green),
+                      style: TextStyle(fontSize: 45, color: Colors.green),
                     );
                   } else if (state is InternetConnected &&
                       state.connectionType == ConnectionType.Mobile) {
                     return const Text(
                       'Mobile',
-                      style: TextStyle(fontSize: 35, color: Colors.orange),
+                      style: TextStyle(fontSize: 45, color: Colors.orange),
                     );
                   } else if (state is InternetDesconnected) {
                     return const Text(
                       'Disconnected',
-                      style: TextStyle(fontSize: 35, color: Colors.red),
+                      style: TextStyle(fontSize: 45, color: Colors.red),
                     );
                   }
                   return const CircularProgressIndicator();
@@ -117,12 +117,19 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              MaterialButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, route.secondScreen);
-                },
-                color: color,
-                child: const Text('Go to the second Screen'),
+              SizedBox(
+                height: 40,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: color,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  onPressed: () {
+                    Navigator.pushNamed(context, route.secondScreen);
+                  },
+                  child: const Text('Go to the second Screen',
+                      style: TextStyle(color: Colors.white)),
+                ),
               )
             ],
           ),
