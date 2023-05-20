@@ -1,6 +1,7 @@
 part of 'counter_cubit.dart';
 
 //This class is the blueprint for all possible states which will be emitted by the cubit
+// ignore: must_be_immutable
 class CounterState extends Equatable {
   int counterValue;
   bool? wasIncremented;
@@ -10,7 +11,6 @@ class CounterState extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         counterValue,
         wasIncremented,

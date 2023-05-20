@@ -1,7 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:counter_app/business_logic/cubit/counter/counter_cubit.dart';
-import 'package:counter_app/business_logic/cubit/internet/internet_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

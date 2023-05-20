@@ -1,7 +1,5 @@
-import 'dart:async';
 import 'dart:convert';
 
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 part 'counter_state.dart';
@@ -33,7 +31,6 @@ class CounterCubit extends Cubit<CounterState> with HydratedMixin {
 
   @override
   void onError(Object error, StackTrace stackTrace) {
-    print("$error, $stackTrace");
     super.onError(error, stackTrace);
   }
 }
